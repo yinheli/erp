@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Order">
+	<resultMap type="com.nzonly.erp.entity.Order" id="BaseResultMap">
+		<!-- 主键 -->
+		<id column="id" property="id" jdbcType="BIGINT" />
+
+		<!-- 子订单编号  -->
+		<result column="oid" property="oid" jdbcType="BIGINT" />
+		
+		<!-- 订单状态 -->
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		
+		<!-- 商品标题 -->
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		
+		<!-- 商品价格 -->
+		<result column="price" property="price" jdbcType="VARCHAR" />
+		
+		<!-- 商品数字ID  -->
+		<result column="num_iid" property="numIid" jdbcType="BIGINT" />
+		
+		<!-- 套餐ID  -->
+		<result column="item_meal_id" property="itemMealId" jdbcType="BIGINT" />
+		
+		<!-- 购买数量  -->
+		<result column="num" property="num" jdbcType="INTEGER" />
+		
+		<!-- 外部网店自己定义的Sku编号  -->
+		<result column="outer_sku_id" property="outerSkuId" jdbcType="VARCHAR" />
+		
+		<!-- 子订单来源  -->
+		<result column="order_from" property="orderFrom" jdbcType="VARCHAR" />
+		
+		<!-- 应付金额  -->
+		<result column="total_fee" property="totalFee" jdbcType="VARCHAR" />
+		
+		<!-- 子订单实付金额  -->
+		<result column="payment" property="payment" jdbcType="VARCHAR" />
+		
+		<!-- 订单优惠金额  -->
+		<result column="discount_fee" property="discountFee" jdbcType="VARCHAR" />
+		
+		<!-- 订单优惠金额  -->
+		<result column="adjust_fee" property="adjustFee" jdbcType="VARCHAR" />
+		
+		<!-- 订单修改时间  -->
+		<result column="modified" property="modified" jdbcType="TIMESTAMP" />
+		
+		<!-- 最近退款ID -->
+		<result column="refund_id" property="refundId" jdbcType="BIGINT" />
+		
+		<!-- 子订单的交易结束时间  -->
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		
+		<!-- 套餐的值  -->
+		<result column="item_meal_name" property="itemMealName" jdbcType="VARCHAR" />
+		
+		<!-- 商品图片的绝对路径  -->
+		<result column="pic_path" property="picPath" jdbcType="VARCHAR" />
+		
+		<!-- 买家昵称  -->
+		<result column="buyer_nick" property="buyerNick" jdbcType="VARCHAR" />
+		
+		<!-- 退款状态  -->
+		<result column="refund_status" property="refundStatus" jdbcType="VARCHAR" />
+		
+		<!-- 商家外部编码  -->
+		<result column="outer_iid" property="outerIid" jdbcType="VARCHAR" />
+		
+		<!-- 订单快照URL  -->
+		<result column="snapshot_url" property="snapshotUrl" jdbcType="VARCHAR" />
+		
+		<!-- 订单快照详细信息 -->
+		<result column="snapshot" property="snapshot" jdbcType="VARCHAR" />
+		
+		<!-- 超时到期时间  -->
+		<result column="timeout_action_time" property="timeoutActionTime" jdbcType="TIMESTAMP" />
+		
+		<!-- 买家是否已评价 -->
+		<result column="buyer_rate" property="buyerRate" jdbcType="VARCHAR" />
+		
+		<!-- 卖家是否已评价  -->
+		<result column="seller_rate" property="sellerRate" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, oid, status, title, price, num_iid, item_meal_id, num, outer_sku_id,
+		total_fee, payment, discount_fee, adjust_fee, modified, refund_id, end_time,
+		item_meal_name, pic_path, buyer_nick, refund_status, outer_iid, snapshot_url,
+		snapshot, timeout_action_time, buyer_rate, seller_rate
+	</sql>
+	
+	<insert id="insert">
+        INSERT INTO `orders` ( oid, status, title, price, num_iid, item_meal_id,
+        num, outer_sku_id, order_from ,total_fee, payment, discount_fee, adjust_fee, modified,
+        refund_id, end_time, item_meal_name, pic_path, buyer_nick, refund_status,
+        outer_iid, snapshot_url, snapshot, timeout_action_time, buyer_rate, seller_rate)
+
+        VALUES (#{oid, jdbcType=BIGINT},
+        #{status, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR},
+        #{price, jdbcType=VARCHAR}, #{numIid, jdbcType=BIGINT},
+        #{itemMealId, jdbcType=BIGINT}, #{num, jdbcType=INTEGER},
+        #{outerSkuId, jdbcType=VARCHAR}, #{orderFrom, jdbcType=VARCHAR},
+        #{totalFee, jdbcType=VARCHAR}, #{payment, jdbcType=VARCHAR},
+        #{discountFee, jdbcType=VARCHAR}, #{adjustFee, jdbcType=VARCHAR},
+        #{modified, jdbcType=TIMESTAMP}, #{refundId, jdbcType=BIGINT},
+        #{endTime, jdbcType=TIMESTAMP}, #{itemMealName, jdbcType=VARCHAR},
+        #{picPath, jdbcType=VARCHAR}, #{buyerNick, jdbcType=VARCHAR},
+        #{refundStatus, jdbcType=VARCHAR}, #{outerIid, jdbcType=VARCHAR},
+        #{snapshotUrl, jdbcType=VARCHAR}, #{snapshot, jdbcType=VARCHAR},
+        #{timeoutActionTime, jdbcType=TIMESTAMP}, #{buyerRate, jdbcType=VARCHAR},
+        #{sellerRate, jdbcType=VARCHAR})
+	</insert>
+
+    <select id="list" resultMap="BaseResultMap">
+        select sql_calc_found_rows *
+        from orders
+    </select>
+
+</mapper>
